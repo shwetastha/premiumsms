@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Premium Sms</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="phone_call">Voice Chat</string>
+    <string name="title_activity_internet_sms">Internet SMS</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_horoscope">Horoscope</string>
+    <string name="title_activity_subscribe_unsubcribe">Subscribe/Unsubscribe</string>
+    <string name="title_activity_internet_smssend">Internet SMS</string>
+    <string name="title_activity_message">Premium SMS</string>
+    <string name="title_activity_status">Premium SMS Status</string>
+    <string name="title_activity_smsreceived">SMS Received</string>
+
+</resources>

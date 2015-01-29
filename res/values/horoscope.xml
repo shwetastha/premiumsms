@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="HoroscopesNepali">
+        <item name="h1">MESH</item>
+        <item name="h2">BRISH</item>
+        <item name="h3">MITHUN</item>
+        <item name="h4">KARKAT</item>
+        <item name="h5">SIMHA</item>
+        <item name="h6">KANYA</item>
+        <item name="h7">TULLA</item>
+        <item name="h8">VRISHCHIK</item>
+        <item name="h9">DHANU</item>
+        <item name="h10">MAKAR</item>
+        <item name="h11">KUMBHA</item>
+        <item name="h12">MIN</item>
+    </string-array>
+    <string-array name="HoroscopesEnglish">
+        <item name="h1">ARIES</item>
+        <item name="h2">TAURUS</item>
+        <item name="h3">GEMINI</item>
+        <item name="h4">CANCER</item>
+        <item name="h5">LEO</item>
+        <item name="h6">VIRGO</item>
+        <item name="h7">LIBRA</item>
+        <item name="h8">SCORPIO</item>
+        <item name="h9">SAGITARIUS</item>
+        <item name="h10">CAPRICORN</item>
+        <item name="h11">AQUARIUS</item>
+        <item name="h12">PISCES</item>
+    </string-array>
+
+</resources>

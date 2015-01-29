@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="internetsms">
+        <item name="i1">SUBSCRIBE/UNSUBSCRIBE</item>
+        <item name="i2">MESSAGE</item>
+    </string-array>
+
+</resources>

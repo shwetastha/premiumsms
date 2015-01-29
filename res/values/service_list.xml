@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="service_list">
+        <item name="s1">VOICE CHAT</item>
+         <item name="s2">INTERNET SMS</item>
+        <item name="s3">NEWS</item>
+        <item name="s4">JOKES</item>
+        <item name="s5">HEALTH</item>
+        <item name="s6">BEAUTY</item>
+        <item name="s7">LOVE TIPS</item>
+        <item name="s8">JOB TIPS</item>
+        <item name="s9">DO YOU KNOW</item>
+        <item name="s10">SHAYARI</item>
+        <item name="s11">THOUGHT OF TODAY</item>
+        <item name="s12">MOTIVATIONAL TIPS</item>
+        <item name="s13">AMAZING FACTS</item>
+        <item name="s14">HOROSCOPE IN NEPALI</item>
+        <item name="s15">HOROSCOPE IN ENGLISH</item>
+       
+    </string-array>
+
+</resources>

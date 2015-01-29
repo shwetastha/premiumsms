@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/buttonSend"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/button"
+        android:text="SEND"
+        android:textColor="#404040"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="normal" />
+
+    <EditText
+        android:id="@+id/SMS"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/roundbox_message"
+        android:gravity="top"
+        android:hint="You Must Subscribe First!"
+        android:padding="10dp"
+        android:textColor="#ffd401"
+        android:textColorHint="#808080"
+        android:textSize="20sp" >
+    </EditText>
+
+</LinearLayout>

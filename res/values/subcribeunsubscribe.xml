@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="subscribeunsubscribe">
+        <item name="b1">SUBSCRIBE</item>
+        <item name="b2">UNSUBSCRIBE</item>
+    </string-array>
+
+</resources>
