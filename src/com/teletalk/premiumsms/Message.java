@@ -26,16 +26,18 @@ public class Message extends Activity {
 
     private final String phnumNtc = String.valueOf("8000");
     private final String phnumNcell = String.valueOf("8888");
-    private final String same = String.valueOf("5556");
+    private final String phnum = String.valueOf("5000");
+    private final String same = String.valueOf("39191");
     private String msg;
     TextView subUnsub;
     TextView simType;
     TextView serviceType;
     
-    private final int internet_sms = 1;
-    private final int horoscope_nepali = 13;
-    private final int horoscope_english = 14;
-    private final int service = 2;
+    private final int internet_sms = 2;
+    private final int horoscope_nepali = 14;
+    private final int horoscope_english = 15;
+    private final int service = 3;
+    private final int misscall = 0;
     private int statusSubscribe = 11111;
     private final int statusUnsubscribe = 10001;
 
@@ -62,10 +64,19 @@ public class Message extends Activity {
                     subUnsub.setText("Unsubscribe Selected");
                 }
                 cs = getIntent().getIntExtra("val3", 0);
-                String typeOfService = getTypeOfService(cs);
-                serviceType.setText("Service Type: " + typeOfService);
+                if (cs==misscall) {
+                    String typeOfService = getTypeOfService(cs);
+                    serviceType.setText("Service Type: " + typeOfService);
 
-                sendmsg();
+                    sendmsg_misscall();
+                }
+                else{
+                    String typeOfService = getTypeOfService(cs);
+                    serviceType.setText("Service Type: " + typeOfService);
+
+                    sendmsg();
+
+                }
             } else if (ps == horoscope_english) {
                 if (status == statusSubscribe) {
                     subUnsub.setText("Subscribe Selected");
@@ -99,25 +110,31 @@ public class Message extends Activity {
                 message.setText("Message: " + msg);
                 try {
                     SmsManager smsManager = SmsManager.getDefault();
-                    simType.setText(msg);
+                    //simType.setText(msg);
+                    String typeOfSim1 = getTypeOfSim();
+
                     PendingIntent sentPI;
                     String SENT = "SMS_SENT";
                     sentPI = PendingIntent.getBroadcast(this, 0, new Intent(SENT), 0);
-                    if (typeOfSim.equals("NTC")) {
+                    if (typeOfSim1.equals("NTC")) {
+
                         smsManager.sendTextMessage(same, null, msg, null, null);
                         Toast.makeText(getApplicationContext(), "Message Send Successful.",
                                 Toast.LENGTH_LONG).show();
-                    }else if (typeOfSim.equals("NCELL")){
+                    } else if (typeOfSim1.equals("NCELL")) {
+
                         smsManager.sendTextMessage(same, null, msg, null, null);
                         Toast.makeText(getApplicationContext(), "Message Send Successful.",
                                 Toast.LENGTH_LONG).show();
                     }
+
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "Message Send Failed.", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
-
             }
+
+            
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -129,31 +146,32 @@ public class Message extends Activity {
 
     private String getTypeOfService(int position) {
         SparseArray<String> message = new SparseArray<String>();
-        message.put(2,"NEWS");
-        message.put(3,"JOKES");
-        message.put(4,"HEALTH");
-        message.put(5,"BEAUTY");
-        message.put(6,"LOVE");
-        message.put(7,"JOBS");
-        message.put(8,"DYK");
+        message.put(3,"NEWS");
+        message.put(4,"JOKES");
+        message.put(5,"HEALTH");
+        message.put(6,"BEAUTY");
+        message.put(7,"LOVE");
+        message.put(8,"JOBS");
+        message.put(9,"DYK");
         message.put(10,"SHAYARI");
         message.put(11,"TOTD");
         message.put(12,"MOT");
         message.put(13,"FACTS");
+        message.put(0,"");
 
         SparseArray<String> service = new SparseArray<String>();
-        service.put(2,"News");
-        service.put(3,"Jokes");
-        service.put(4,"Health");
-        service.put(5,"Beauty");
-        service.put(6,"Love Tips");
-        service.put(7,"Job Tips");
-        service.put(8,"Do You Know");
-        service.put(9,"Shayari");
-        service.put(10,"Thought Of The Day");
-        service.put(11,"Motivational Tips");
-        service.put(12,"Amazing Facts");
-
+        service.put(3,"News");
+        service.put(4,"Jokes");
+        service.put(5,"Health");
+        service.put(6,"Beauty");
+        service.put(7,"Love Tips");
+        service.put(8,"Job Tips");
+        service.put(9,"Do You Know");
+        service.put(10,"Shayari");
+        service.put(11,"Thought Of The Day");
+        service.put(12,"Motivational Tips");
+        service.put(13,"Amazing Facts");
+        service.put(0,"Miss Call Alert");
         switch (status){
             case 11111:
                 msg = "SUB "+message.get(position);
@@ -296,7 +314,28 @@ public class Message extends Activity {
             e.printStackTrace();
         }
     }
-	
+    void sendmsg_misscall() {
+        TextView message = (TextView) findViewById(R.id.textView4);
+        message.setText("Message: " + msg);
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            //simType.setText(msg);
+            String typeOfSim = getTypeOfSim();
+
+            PendingIntent sentPI;
+            String SENT = "SMS_SENT";
+            sentPI = PendingIntent.getBroadcast(this, 0, new Intent(SENT), 0);
+
+            smsManager.sendTextMessage(phnum, null, msg, null, null);
+            Toast.makeText(getApplicationContext(), "Message Send Successful.",
+                    Toast.LENGTH_LONG).show();
+
+
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Message Send Failed.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

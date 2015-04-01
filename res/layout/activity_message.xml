@@ -2,6 +2,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_margin="10dp"
+    android:background="#282828"
     android:orientation="vertical" >
 
     <TextView
@@ -10,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:text="Subscribe/Unsubcribe"
-        android:textColor="#ffd401" />
+        android:textColor="#ff663f" />
 
     <TextView
         android:id="@+id/textView4"
@@ -18,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:text="Sim"
-        android:textColor="#ffd401" />
+        android:textColor="#ff663f" />
 
     <TextView
         android:id="@+id/textView3"
@@ -26,6 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:text="Service"
-        android:textColor="#ffd401" />
+        android:textColor="#ff663f" />
 
 </LinearLayout>

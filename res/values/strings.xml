@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Premium Sms</string>
+    <string name="app_name">Colors World</string>
     <string name="hello_world">Hello world!</string>
     <string name="phone_call">Voice Chat</string>
     <string name="title_activity_internet_sms">Internet SMS</string>

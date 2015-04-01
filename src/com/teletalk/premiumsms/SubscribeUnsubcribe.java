@@ -23,10 +23,10 @@ public class SubscribeUnsubcribe extends ListActivity {
     private int val1;
     private int val2;
     private int val3;
-    private final int internet_sms = 1;
-    private final int horoscope_nepali = 13;
-    private final int horoscope_english = 14;
-    private final int serviceList = 2;
+    private final int internet_sms = 2;
+    private final int horoscope_nepali = 14;
+    private final int horoscope_english = 15;
+    private final int serviceList = 3;
     private int statusSubscribe = 11111;
     private final int statusUnsubscribe = 10001;
 	@Override
@@ -58,7 +58,7 @@ public class SubscribeUnsubcribe extends ListActivity {
                          intent.putExtra("val3", val3);
                          startActivity(intent);
                      } else {
-                         int value1 = 2;
+                         int value1 = 3;
                          int value3 = getIntent().getIntExtra("val3", 0);
                          Intent intent = new Intent(SubscribeUnsubcribe.this, Message.class);
                          intent.putExtra("val3", value3);

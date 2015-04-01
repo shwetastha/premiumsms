@@ -10,7 +10,7 @@
         android:layout_height="60dp"
         android:background="@drawable/button"
         android:gravity="center_vertical|center_horizontal"
-        android:textColor="#404040"
+        android:textColor="#282828"
         android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="normal" />

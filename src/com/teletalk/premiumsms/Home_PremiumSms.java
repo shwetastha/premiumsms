@@ -19,13 +19,13 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class Home_PremiumSms extends ListActivity {
-	private final int internet_sms = 1;
-    private final int horoscope_nepali = 13;
-    private final int horoscope_english = 14;
-    private final int serviceList = 2;
+	private final int internet_sms = 2;
+    private final int horoscope_nepali = 14;
+    private final int horoscope_english = 15;
+    private final int serviceList = 3;
     private int statusSubscribe = 11111;
     private final int statusUnsubscribe = 10001;
-    private final int call= 0;
+    private final int call= 1;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

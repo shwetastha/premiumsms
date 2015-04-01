@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#282828"
     android:orientation="vertical" >
 
     <Button
@@ -10,7 +11,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/button"
         android:text="SEND"
-        android:textColor="#404040"
+        android:textColor="#282828"
         android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="normal" />
@@ -24,7 +25,7 @@
         android:gravity="top"
         android:hint="You Must Subscribe First!"
         android:padding="10dp"
-        android:textColor="#ffd401"
+        android:textColor="#ff663f"
         android:textColorHint="#808080"
         android:textSize="20sp" >
     </EditText>

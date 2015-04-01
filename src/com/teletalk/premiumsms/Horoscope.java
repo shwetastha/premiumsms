@@ -27,8 +27,8 @@ public class Horoscope extends ListActivity {
     private int val2;
     private int val3;
    
-    private final int horoscope_nepali = 13;
-    private final int horoscope_english = 14;
+    private final int horoscope_nepali = 14;
+    private final int horoscope_english = 15;
    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -32,7 +32,7 @@ public class SmsReceive extends BroadcastReceiver {
 			
 			if (phnum.equalsIgnoreCase("39191"))
 			{
-				Toast.makeText(context,"Message received From Premium SMS", Toast.LENGTH_LONG).show();
+				Toast.makeText(context,"Message received From COLORS WORLD", Toast.LENGTH_LONG).show();
 			  Intent myIntent=new Intent(context, SMSReceived.class);   
 			  myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
 			  myIntent.putExtra("name", str);
