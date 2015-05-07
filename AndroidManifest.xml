@@ -56,6 +56,11 @@
             android:label="@string/title_activity_smsreceived"
             android:theme="@android:style/Theme.DeviceDefault.Dialog" >
         </activity>
+        <activity
+            android:name=".VoiceCall"
+            android:label="Voice Call"
+            android:theme="@android:style/Theme.DeviceDefault.Dialog" >
+        </activity>
 
         <receiver android:name=".SmsReceive" >
             <intent-filter>

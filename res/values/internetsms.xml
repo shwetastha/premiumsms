@@ -5,5 +5,8 @@
         <item name="i1">SUBSCRIBE/UNSUBSCRIBE</item>
         <item name="i2">MESSAGE</item>
     </string-array>
-
+    <string-array name="voicecall">
+        <item name="i1">SMS</item>
+        <item name="i2">IVR</item>
+    </string-array>
 </resources>
