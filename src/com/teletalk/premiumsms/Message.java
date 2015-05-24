@@ -24,7 +24,7 @@ public class Message extends Activity {
     private int cs;
 
     private final String phnumNtc = String.valueOf("8000");
-//    private final String phnumNcell = String.valueOf("8888");
+    //    private final String phnumNcell = String.valueOf("8888");
     private final String phnum = String.valueOf("5000");
     private final String same = String.valueOf("39191");
     private final String voice_call_num = String.valueOf("1608");
@@ -340,8 +340,8 @@ public class Message extends Activity {
             if (typeOfSim.equals("NTC")) {
 
                 smsManager.sendTextMessage(phnum, null, msg, null, null);
-            Toast.makeText(getApplicationContext(), "Message Send Successful.",
-                    Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Message Send Successful.",
+                        Toast.LENGTH_LONG).show();
             } else if (typeOfSim.equals("NCELL")) {
 //                smsManager.sendTextMessage(phnum, null, msg, null, null);
                 Toast.makeText(getApplicationContext(), "Message Send Not Allowed.",
@@ -352,7 +352,7 @@ public class Message extends Activity {
                         Toast.LENGTH_LONG).show();
             }
 
-            } catch (Exception e) {
+        } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Message Send Failed.", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
@@ -371,9 +371,9 @@ public class Message extends Activity {
             sentPI = PendingIntent.getBroadcast(this, 0, new Intent(SENT), 0);
 
             if (typeOfSim.equals("NTC")) {
-            smsManager.sendTextMessage(voice_call_num, null, msg, null, null);
-            Toast.makeText(getApplicationContext(), "Message Send Successful.",
-                    Toast.LENGTH_LONG).show();
+                smsManager.sendTextMessage(voice_call_num, null, msg, null, null);
+                Toast.makeText(getApplicationContext(), "Message Send Successful.",
+                        Toast.LENGTH_LONG).show();
             } else if (typeOfSim.equals("NCELL")) {
 //                smsManager.sendTextMessage(voice_call_num, null, msg, null, null);
                 Toast.makeText(getApplicationContext(), "Message Send Not Allowed.",

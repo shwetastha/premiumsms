@@ -13,11 +13,11 @@ import android.widget.Toast;
 
 public class InternetSMSsend extends Activity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_internet_smssend);
-		Button buttonSend = (Button) findViewById(R.id.buttonSend);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_internet_smssend);
+        Button buttonSend = (Button) findViewById(R.id.buttonSend);
         final EditText textSMS = (EditText) findViewById(R.id.SMS);
 
         buttonSend.setOnClickListener(new OnClickListener() {
@@ -36,7 +36,7 @@ public class InternetSMSsend extends Activity {
                     textSMS.setText("");
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(),
-                            "SMS faild, please try again later!",
+                            "SMS failed, please try again later!",
                             Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
@@ -44,8 +44,8 @@ public class InternetSMSsend extends Activity {
 
 
         });
-		
-	}
+
+    }
 
 
 }

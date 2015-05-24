@@ -14,15 +14,15 @@ import android.widget.TextView;
 
 public class SMSReceived extends Activity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_smsreceived);
-		Button close = (Button) findViewById(R.id.closebutton);
-		TextView messagebox = (TextView) findViewById(R.id.SMSreceive);
-		
-		Intent iin= getIntent();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_smsreceived);
+        Button close = (Button) findViewById(R.id.closebutton);
+        TextView messagebox = (TextView) findViewById(R.id.SMSreceive);
+
+        Intent iin= getIntent();
         Bundle b = iin.getExtras();
 
         if(b!=null)
@@ -31,16 +31,16 @@ public class SMSReceived extends Activity {
             messagebox.setText(j);
         }
 
-       close.setOnClickListener(new OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			finish();
-		}
-	});
-	
-	}
+        close.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                finish();
+            }
+        });
+
+    }
 
 
 }

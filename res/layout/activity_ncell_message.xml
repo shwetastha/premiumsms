@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="10dp"
+    android:background="#282828"
+    android:orientation="vertical" >
+
+
+    <TextView
+        android:id="@+id/textView4n"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Sim"
+        android:textColor="#ff663f" />
+
+    <TextView
+        android:id="@+id/textView3n"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Service"
+        android:textColor="#ff663f" />
+
+</LinearLayout>

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.teletalk.premiumsms"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -13,14 +13,21 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".Home_PremiumSms"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,43 +37,42 @@
         <activity
             android:name=".InternetSMS"
             android:label="@string/title_activity_internet_sms"
-            android:theme="@android:style/Theme.DeviceDefault.Dialog" >
-        </activity>
+            android:theme="@android:style/Theme.DeviceDefault.Dialog"></activity>
         <activity
             android:name=".Horoscope"
-            android:label="@string/title_activity_horoscope" >
-        </activity>
+            android:label="@string/title_activity_horoscope"></activity>
         <activity
             android:name=".SubscribeUnsubcribe"
             android:label="@string/title_activity_subscribe_unsubcribe"
-            android:theme="@android:style/Theme.DeviceDefault.Dialog" >
-        </activity>
+            android:theme="@android:style/Theme.DeviceDefault.Dialog"></activity>
         <activity
             android:name=".InternetSMSsend"
             android:label="@string/title_activity_internet_smssend"
-            android:theme="@android:style/Theme.DeviceDefault.Dialog" >
-        </activity>
+            android:theme="@android:style/Theme.DeviceDefault.Dialog"></activity>
         <activity
             android:name=".Message"
             android:label="@string/title_activity_status"
-            android:theme="@android:style/Theme.DeviceDefault.Dialog" >
-        </activity>
+            android:theme="@android:style/Theme.DeviceDefault.Dialog"></activity>
         <activity
             android:name=".SMSReceived"
             android:label="@string/title_activity_smsreceived"
-            android:theme="@android:style/Theme.DeviceDefault.Dialog" >
-        </activity>
+            android:theme="@android:style/Theme.DeviceDefault.Dialog"></activity>
         <activity
             android:name=".VoiceCall"
             android:label="Voice Call"
-            android:theme="@android:style/Theme.DeviceDefault.Dialog" >
-        </activity>
+            android:theme="@android:style/Theme.DeviceDefault.Dialog"></activity>
 
-        <receiver android:name=".SmsReceive" >
+        <receiver android:name=".SmsReceive">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
+
+        <activity
+            android:name=".NcellMessage"
+            android:label="@string/title_activity_status"
+            android:theme="@android:style/Theme.DeviceDefault.Dialog"></activity>
     </application>
 
 </manifest>
