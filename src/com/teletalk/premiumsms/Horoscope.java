@@ -23,22 +23,22 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class Horoscope extends ListActivity {
-    private int service;
+	private int service;
     private int val1;
     private int val2;
     private int val3;
-
+   
     private final int horoscope_nepali = 14;
     private final int horoscope_english = 15;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_horoscope);
-        final int operator =getTypeOfSim();
-        service = getIntent().getExtras().getInt("service");
+   
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_horoscope);
+		final int operator =getTypeOfSim();
+		service = getIntent().getExtras().getInt("service");
         if (service == horoscope_nepali) {
-            setListAdapter(new NepaliAdapter<String>(this, android.R.layout.simple_list_item_1,R.id.row, getResources().getStringArray(R.array.HoroscopesNepali)));
+        	setListAdapter(new NepaliAdapter<String>(this, android.R.layout.simple_list_item_1,R.id.row, getResources().getStringArray(R.array.HoroscopesNepali)));
 
             ListView lv = getListView();
 
@@ -47,23 +47,23 @@ public class Horoscope extends ListActivity {
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                         long arg3) {
-                    // TODO Auto-generated method stub
-                    if (operator == 44) {
-                        Intent intent = new Intent(Horoscope.this, SubscribeUnsubcribe.class);
-                        intent.putExtra("service", service);
-                        intent.putExtra("val3", position);
-                        startActivity(intent);
-                    }
-                    else if(operator==88){
-                        Intent intent = new Intent(Horoscope.this, NcellMessage.class);
-                        intent.putExtra("val1", service);
-                        intent.putExtra("val2", position);
-                        startActivity(intent);
-                    }
-                }
+					// TODO Auto-generated method stub
+					if (operator == 44) {
+						Intent intent = new Intent(Horoscope.this, SubscribeUnsubcribe.class);
+						intent.putExtra("service", service);
+						intent.putExtra("val3", position);
+						startActivity(intent);
+					}
+					else if(operator==88){
+						Intent intent = new Intent(Horoscope.this, NcellMessage.class);
+						intent.putExtra("val1", service);
+						intent.putExtra("val2", position);
+						startActivity(intent);
+					}
+				}
             });
         } else if (service == horoscope_english) {
-            setListAdapter(new EnglishAdapter<String>(this, android.R.layout.simple_list_item_1,R.id.row, getResources().getStringArray(R.array.HoroscopesEnglish)));
+        	setListAdapter(new EnglishAdapter<String>(this, android.R.layout.simple_list_item_1,R.id.row, getResources().getStringArray(R.array.HoroscopesEnglish)));
 
             ListView lv = getListView();
 
@@ -72,83 +72,83 @@ public class Horoscope extends ListActivity {
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                         long arg3) {
-                    // TODO Auto-generated method stub
-                    if (operator == 44) {
-                        Intent intent = new Intent(Horoscope.this, SubscribeUnsubcribe.class);
+					// TODO Auto-generated method stub
+					if (operator == 44) {
+						Intent intent = new Intent(Horoscope.this, SubscribeUnsubcribe.class);
 
-                        intent.putExtra("service", service);
-                        intent.putExtra("val3", position);
-                        startActivity(intent);
-                    }
-                    else if(operator==88){
-                        Intent intent = new Intent(Horoscope.this, NcellMessage.class);
-                        intent.putExtra("val1", service);
-                        intent.putExtra("val2", position);
-                        startActivity(intent);
-                    }
-                }
+						intent.putExtra("service", service);
+						intent.putExtra("val3", position);
+						startActivity(intent);
+					}
+					else if(operator==88){
+						Intent intent = new Intent(Horoscope.this, NcellMessage.class);
+						intent.putExtra("val1", service);
+						intent.putExtra("val2", position);
+						startActivity(intent);
+					}
+				}
             });
         }
+		
+	}
 
-    }
+	
+	
+	public class NepaliAdapter<T> extends ArrayAdapter<String> {
+
+		public NepaliAdapter(Context context, int resource, int textViewResourceId,
+				String[] strings) {
+			super(context, resource, textViewResourceId, strings);
+			// TODO Auto-generated constructor stub
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			// TODO Auto-generated method stub
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		
+		View row = inflater.inflate(R.layout.custom_layout, parent, false);
+		String[] items = getResources().getStringArray(R.array.HoroscopesNepali); 
+		TextView tv = (TextView) row.findViewById(R.id.row);
+		tv.setText(items[position]);	
+		return row;
+		}		
+	}
+	
+	public class EnglishAdapter<T> extends ArrayAdapter<String> {
+
+		public EnglishAdapter(Context context, int resource, int textViewResourceId,
+				String[] strings) {
+			super(context, resource, textViewResourceId, strings);
+			// TODO Auto-generated constructor stub
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			// TODO Auto-generated method stub
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		
+		View row = inflater.inflate(R.layout.custom_layout, parent, false);
+		String[] items = getResources().getStringArray(R.array.HoroscopesEnglish); 
+		TextView tv = (TextView) row.findViewById(R.id.row);
+		tv.setText(items[position]);	
+		return row;
+		}		
+	}
+	private int getTypeOfSim() {
+
+		TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+		//phone number line
+		String OperatorName = tm.getSimOperatorName();
 
 
+		if (OperatorName.equals("Namaste")) {
+			return 44;
 
-    public class NepaliAdapter<T> extends ArrayAdapter<String> {
-
-        public NepaliAdapter(Context context, int resource, int textViewResourceId,
-                             String[] strings) {
-            super(context, resource, textViewResourceId, strings);
-            // TODO Auto-generated constructor stub
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            // TODO Auto-generated method stub
-            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            View row = inflater.inflate(R.layout.custom_layout, parent, false);
-            String[] items = getResources().getStringArray(R.array.HoroscopesNepali);
-            TextView tv = (TextView) row.findViewById(R.id.row);
-            tv.setText(items[position]);
-            return row;
-        }
-    }
-
-    public class EnglishAdapter<T> extends ArrayAdapter<String> {
-
-        public EnglishAdapter(Context context, int resource, int textViewResourceId,
-                              String[] strings) {
-            super(context, resource, textViewResourceId, strings);
-            // TODO Auto-generated constructor stub
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            // TODO Auto-generated method stub
-            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            View row = inflater.inflate(R.layout.custom_layout, parent, false);
-            String[] items = getResources().getStringArray(R.array.HoroscopesEnglish);
-            TextView tv = (TextView) row.findViewById(R.id.row);
-            tv.setText(items[position]);
-            return row;
-        }
-    }
-    private int getTypeOfSim() {
-
-        TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        //phone number line
-        String OperatorName = tm.getSimOperatorName();
-
-
-        if (OperatorName.equals("Namaste")) {
-            return 88;
-
-        } else if (OperatorName.equals("NCELL")) {
-            return 44;
-        } else
-            return 0;
-    }
+		} else if (OperatorName.equals("NCELL")) {
+			return 88;
+		} else
+			return 0;
+	}
 
 }
