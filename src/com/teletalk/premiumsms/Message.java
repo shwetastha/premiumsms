@@ -26,7 +26,7 @@ public class Message extends Activity {
     private int cs;
 
     private final String phnumNtc = String.valueOf("8000");
-    //    private final String phnumNcell = String.valueOf("8888");
+//    private final String phnumNcell = String.valueOf("8888");
     private final String phnum = String.valueOf("5000");
     private final String same = String.valueOf("39191");
     private final String voice_call_num = String.valueOf("1608");
@@ -110,16 +110,60 @@ public class Message extends Activity {
                 TextView message = (TextView) findViewById(R.id.textView4);
                 message.setText("Message: " + msg);
                 try {
+                    String SENT = "SMS_SENT";
+                    String DELIVERED = "SMS_DELIVERED";
+                    PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent(SENT), 0);
+                    PendingIntent deliveredPI = PendingIntent.getBroadcast(this, 0, new Intent(DELIVERED), 0);
+                    registerReceiver(new BroadcastReceiver() {
+                        @Override
+                        public void onReceive(Context arg0, Intent arg1) {
+                            switch (getResultCode()) {
+                                case Activity.RESULT_OK:
+                                    Toast.makeText(getBaseContext(), "SMS sent",
+                                            Toast.LENGTH_SHORT).show();
+                                    break;
+                                case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
+                                    Toast.makeText(getBaseContext(), "Generic failure",
+                                            Toast.LENGTH_SHORT).show();
+                                    break;
+                                case SmsManager.RESULT_ERROR_NO_SERVICE:
+                                    Toast.makeText(getBaseContext(), "No service",
+                                            Toast.LENGTH_SHORT).show();
+                                    break;
+                                case SmsManager.RESULT_ERROR_NULL_PDU:
+                                    Toast.makeText(getBaseContext(), "Null PDU",
+                                            Toast.LENGTH_SHORT).show();
+                                    break;
+                                case SmsManager.RESULT_ERROR_RADIO_OFF:
+                                    Toast.makeText(getBaseContext(), "Radio off",
+                                            Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+                        }
+                    }, new IntentFilter(SENT));
+                    registerReceiver(new BroadcastReceiver() {
+                        @Override
+                        public void onReceive(Context arg0, Intent arg1) {
+                            switch (getResultCode()) {
+                                case Activity.RESULT_OK:
+                                    Toast.makeText(getBaseContext(), "SMS delivered",
+                                            Toast.LENGTH_SHORT).show();
+                                    break;
+                                case Activity.RESULT_CANCELED:
+                                    Toast.makeText(getBaseContext(), "SMS not delivered",
+                                            Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+                        }
+                    }, new IntentFilter(DELIVERED));
+
                     SmsManager smsManager = SmsManager.getDefault();
                     //simType.setText(msg);
 
-                    PendingIntent sentPI;
-                    String SENT = "SMS_SENT";
-                    sentPI = PendingIntent.getBroadcast(this, 0, new Intent(SENT), 0);
 
-                    smsManager.sendTextMessage(same, null, msg, null, null);
-                    Toast.makeText(getApplicationContext(), "Message Send Successful.",
-                            Toast.LENGTH_LONG).show();
+                        smsManager.sendTextMessage(same, null, msg,  sentPI, deliveredPI);
+                        Toast.makeText(getApplicationContext(), "Message Send Successful.",
+                                Toast.LENGTH_LONG).show();
 
 
                 } catch (Exception e) {
@@ -326,7 +370,7 @@ public class Message extends Activity {
                 }
             }, new IntentFilter(DELIVERED));
             SmsManager sms = SmsManager.getDefault();
-            sms.sendTextMessage(phnumNtc, null, msg, null, null);
+            sms.sendTextMessage(phnumNtc, null, msg,  sentPI, deliveredPI);
 
 
         } catch (Exception e) {
@@ -386,10 +430,10 @@ public class Message extends Activity {
                 }
             }, new IntentFilter(DELIVERED));
             SmsManager sms = SmsManager.getDefault();
-            sms.sendTextMessage(phnum, null, msg, null, null);
+            sms.sendTextMessage(phnum, null, msg,  sentPI, deliveredPI);
 
 
-        } catch (Exception e) {
+            } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Message Send Failed.", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
@@ -446,9 +490,7 @@ public class Message extends Activity {
                 }
             }, new IntentFilter(DELIVERED));
             SmsManager sms = SmsManager.getDefault();
-            sms.sendTextMessage(voice_call_num, null, msg, null, null);
-            Toast.makeText(getApplicationContext(), "Message Send Successful.",
-                    Toast.LENGTH_LONG).show();
+            sms.sendTextMessage(voice_call_num, null, msg, sentPI, deliveredPI);
 
 
 

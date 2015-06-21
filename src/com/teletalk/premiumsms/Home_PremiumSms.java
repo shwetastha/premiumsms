@@ -84,7 +84,7 @@ public class Home_PremiumSms extends ListActivity {
                     Log.e("PremiumSMS", "SELECTED = NCELL");
                     if (position == call || position == internet_sms || position == 0) {
                         //For Phone Call
-                        Toast.makeText(getBaseContext(), "This service is not allowed for Ncell", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(), "This service is not allowed for Ncell", Toast.LENGTH_SHORT).show();
                     } else {
                         if (position == horoscope_nepali || position == horoscope_english) {
                             //For Horoscope.
@@ -135,7 +135,6 @@ public class Home_PremiumSms extends ListActivity {
         TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         //phone number line
         String OperatorName = tm.getSimOperatorName();
-        Log.e("PremiumSMS", "Operator="+OperatorName);
 
         if (OperatorName.equalsIgnoreCase("Namaste")) {
             return operator_ntc;
