@@ -30,6 +30,8 @@ public class Horoscope extends ListActivity {
 
     private final int horoscope_nepali = 14;
     private final int horoscope_english = 15;
+    private final int operator_ntc = 88;
+    private final int operator_ncell = 44;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +50,13 @@ public class Horoscope extends ListActivity {
                 public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                         long arg3) {
                     // TODO Auto-generated method stub
-                    if (operator == 44) {
+                    if (operator == operator_ntc) {
                         Intent intent = new Intent(Horoscope.this, SubscribeUnsubcribe.class);
                         intent.putExtra("service", service);
                         intent.putExtra("val3", position);
                         startActivity(intent);
                     }
-                    else if(operator==88){
+                    else if(operator==operator_ncell){
                         Intent intent = new Intent(Horoscope.this, NcellMessage.class);
                         intent.putExtra("val1", service);
                         intent.putExtra("val2", position);
@@ -73,14 +75,14 @@ public class Horoscope extends ListActivity {
                 public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                         long arg3) {
                     // TODO Auto-generated method stub
-                    if (operator == 44) {
+                    if (operator == operator_ntc) {
                         Intent intent = new Intent(Horoscope.this, SubscribeUnsubcribe.class);
 
                         intent.putExtra("service", service);
                         intent.putExtra("val3", position);
                         startActivity(intent);
                     }
-                    else if(operator==88){
+                    else if(operator==operator_ncell){
                         Intent intent = new Intent(Horoscope.this, NcellMessage.class);
                         intent.putExtra("val1", service);
                         intent.putExtra("val2", position);
@@ -142,11 +144,11 @@ public class Horoscope extends ListActivity {
         String OperatorName = tm.getSimOperatorName();
 
 
-        if (OperatorName.equals("Namaste")) {
-            return 88;
+        if (OperatorName.equalsIgnoreCase("Namaste")) {
+            return operator_ntc;
 
-        } else if (OperatorName.equals("NCELL")) {
-            return 44;
+        } else if (OperatorName.equalsIgnoreCase("NCELL")) {
+            return operator_ncell;
         } else
             return 0;
     }

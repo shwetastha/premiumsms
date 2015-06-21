@@ -2,7 +2,10 @@ package com.teletalk.premiumsms;
 
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -89,14 +92,39 @@ public class NcellMessage extends Activity {
         TextView message = (TextView) findViewById(R.id.textView4n);
         message.setText("Message: " + msg);
         try {
-            SmsManager smsManager = SmsManager.getDefault();
-
-            PendingIntent sentPI;
             String SENT = "SMS_SENT";
-            sentPI = PendingIntent.getBroadcast(this, 0, new Intent(SENT), 0);
-            smsManager.sendTextMessage(phnum, null, msg, null, null);
-            Toast.makeText(getApplicationContext(), "Message Send Successful.",
-                    Toast.LENGTH_LONG).show();
+            PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent(SENT), 0);
+            registerReceiver(new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context arg0, Intent arg1) {
+                    switch (getResultCode()) {
+                        case Activity.RESULT_OK:
+                            Toast.makeText(getBaseContext(), "SMS sent",
+                                    Toast.LENGTH_SHORT).show();
+                            break;
+                        case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
+                            Toast.makeText(getBaseContext(), "Generic failure",
+                                    Toast.LENGTH_SHORT).show();
+                            break;
+                        case SmsManager.RESULT_ERROR_NO_SERVICE:
+                            Toast.makeText(getBaseContext(), "No service",
+                                    Toast.LENGTH_SHORT).show();
+                            break;
+                        case SmsManager.RESULT_ERROR_NULL_PDU:
+                            Toast.makeText(getBaseContext(), "Null PDU",
+                                    Toast.LENGTH_SHORT).show();
+                            break;
+                        case SmsManager.RESULT_ERROR_RADIO_OFF:
+                            Toast.makeText(getBaseContext(), "Radio off",
+                                    Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+            }, new IntentFilter(SENT));
+            SmsManager sms = SmsManager.getDefault();
+            sms.sendTextMessage(phnum, null, msg, sentPI, null);
+//            Toast.makeText(getApplicationContext(), "Message Send Successful.",
+//                    Toast.LENGTH_LONG).show();
 
 
         } catch (Exception e) {
@@ -134,7 +162,7 @@ public class NcellMessage extends Activity {
         service.put(10, "KUMBHA");
         service.put(11, "MIN");
 
-        msg = "RASHI " + message.get(position);
+        msg = message.get(position);
         return service.get(position);
 
     }
@@ -169,7 +197,7 @@ public class NcellMessage extends Activity {
         service.put(10, "AQUARIUS");
         service.put(11, "PISCES");
 
-        msg = "HORO " + message.get(position);
+        msg = message.get(position);
         return service.get(position);
 
 
