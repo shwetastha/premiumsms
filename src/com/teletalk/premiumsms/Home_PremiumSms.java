@@ -15,10 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+
+import com.mediatek.telephony.TelephonyManagerEx;
 
 public class Home_PremiumSms extends ListActivity {
     private final int operator_ntc = 88;
@@ -31,14 +34,23 @@ public class Home_PremiumSms extends ListActivity {
     private int statusSubscribe = 11111;
     private final int statusUnsubscribe = 10001;
     private final int call = 1;
-    int operator;
+    int operator, simSelected;
+    String operator_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home__premium_sms);
-        operator =getTypeOfSim();
+        simSelected = getIntent().getIntExtra("sim", 100);
+        if (simSelected==0)
+            operator =getTypeOfSim(0);
+        else if (simSelected==1)
+            operator = getTypeOfSim(1);
+        else
+            operator = getTypeOfSim();
+        Log.e("PremiumSMS", "SELECTED = "+operator);
         setListAdapter(new MyAdapter<String>(this, android.R.layout.simple_list_item_1, R.id.row, getResources().getStringArray(R.array.service_list)));
         ListView lv = getListView();
+
 
         //ListView OnclickListener
         lv.setOnItemClickListener(new OnItemClickListener() {
@@ -135,6 +147,19 @@ public class Home_PremiumSms extends ListActivity {
         TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         //phone number line
         String OperatorName = tm.getSimOperatorName();
+
+        if (OperatorName.equalsIgnoreCase("Namaste")) {
+            return operator_ntc;
+        } else if (OperatorName.equalsIgnoreCase("NCELL")) {
+            return operator_ncell;
+        } else
+            return operator_other;
+    }
+    private int getTypeOfSim(int sim) {
+
+        TelephonyManagerEx tm = new TelephonyManagerEx(Home_PremiumSms.this);
+        //phone number line
+        String OperatorName = tm.getSimOperatorName(sim);
 
         if (OperatorName.equalsIgnoreCase("Namaste")) {
             return operator_ntc;
