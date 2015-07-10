@@ -1,6 +1,7 @@
 package com.teletalk.premiumsms;
 
 
+import com.mediatek.telephony.TelephonyManagerEx;
 import com.teletalk.premiumsms.Home_PremiumSms.MyAdapter;
 
 import android.app.Activity;
@@ -26,7 +27,8 @@ public class Horoscope extends ListActivity {
     private int service;
     private int val1;
     private int val2;
-    private int val3;
+    private int simSelected;
+    private int operator;
 
     private final int horoscope_nepali = 14;
     private final int horoscope_english = 15;
@@ -37,8 +39,15 @@ public class Horoscope extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horoscope);
-        final int operator =getTypeOfSim();
         service = getIntent().getExtras().getInt("service");
+        simSelected = getIntent().getIntExtra("sim", 100);
+        if (simSelected==0)
+            operator =getTypeOfSim(0);
+        else if (simSelected==1)
+            operator = getTypeOfSim(1);
+        else
+            operator = getTypeOfSim();
+
         if (service == horoscope_nepali) {
             setListAdapter(new NepaliAdapter<String>(this, android.R.layout.simple_list_item_1,R.id.row, getResources().getStringArray(R.array.HoroscopesNepali)));
 
@@ -54,12 +63,14 @@ public class Horoscope extends ListActivity {
                         Intent intent = new Intent(Horoscope.this, SubscribeUnsubcribe.class);
                         intent.putExtra("service", service);
                         intent.putExtra("val3", position);
+                        intent.putExtra("sim", simSelected);
                         startActivity(intent);
                     }
                     else if(operator==operator_ncell){
                         Intent intent = new Intent(Horoscope.this, NcellMessage.class);
                         intent.putExtra("val1", service);
                         intent.putExtra("val2", position);
+                        intent.putExtra("sim", simSelected);
                         startActivity(intent);
                     }
                 }
@@ -77,6 +88,7 @@ public class Horoscope extends ListActivity {
                     // TODO Auto-generated method stub
                     if (operator == operator_ntc) {
                         Intent intent = new Intent(Horoscope.this, SubscribeUnsubcribe.class);
+                        intent.putExtra("sim", simSelected);
 
                         intent.putExtra("service", service);
                         intent.putExtra("val3", position);
@@ -86,6 +98,8 @@ public class Horoscope extends ListActivity {
                         Intent intent = new Intent(Horoscope.this, NcellMessage.class);
                         intent.putExtra("val1", service);
                         intent.putExtra("val2", position);
+                        intent.putExtra("sim", simSelected);
+
                         startActivity(intent);
                     }
                 }
@@ -151,6 +165,20 @@ public class Horoscope extends ListActivity {
             return operator_ncell;
         } else
             return 0;
+    }
+
+    private int getTypeOfSim(int sim) {
+
+        TelephonyManagerEx tm = new TelephonyManagerEx(Horoscope.this);
+        //phone number line
+        String OperatorName = tm.getSimOperatorName(sim);
+
+        if (OperatorName.equalsIgnoreCase("Namaste")) {
+            return operator_ntc;
+        } else if (OperatorName.equalsIgnoreCase("NCELL")) {
+            return operator_ncell;
+        } else
+            return 100;
     }
 
 }

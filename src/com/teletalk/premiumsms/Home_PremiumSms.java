@@ -65,12 +65,14 @@ public class Home_PremiumSms extends ListActivity {
                         //For Phone Call
                         Intent intent = new Intent(Home_PremiumSms.this, VoiceCall.class);
                         intent.putExtra("voice_call", call);
+                        intent.putExtra("sim", simSelected);
                         startActivity(intent);
                     } else {
                         if (position == internet_sms) {
                             //For Internet SMS.
                             Intent intent = new Intent(Home_PremiumSms.this, InternetSMS.class);
                             intent.putExtra("internet_sms", internet_sms);
+                            intent.putExtra("sim", simSelected);
                             startActivity(intent);
                         } else {
                             if (position == horoscope_nepali || position == horoscope_english) {
@@ -78,6 +80,7 @@ public class Home_PremiumSms extends ListActivity {
                                 Intent intent = new Intent(Home_PremiumSms.this, Horoscope.class);
                                 //System.out.println("HOROSCOPE");
                                 intent.putExtra("service", position);
+                                intent.putExtra("sim", simSelected);
                                 startActivity(intent);
                             } else {
                                 //For News and other stuffs.
@@ -88,6 +91,7 @@ public class Home_PremiumSms extends ListActivity {
                                 intent.putExtra("service", serviceList);
                                 intent.putExtra("val2", val2);
                                 intent.putExtra("val3", position);
+                                intent.putExtra("sim", simSelected);
                                 startActivity(intent);
                             }
                         }
@@ -101,7 +105,7 @@ public class Home_PremiumSms extends ListActivity {
                         if (position == horoscope_nepali || position == horoscope_english) {
                             //For Horoscope.
                             Intent intent = new Intent(Home_PremiumSms.this, Horoscope.class);
-
+                            intent.putExtra("sim", simSelected);
                             intent.putExtra("service", position);
                             startActivity(intent);
                         }
@@ -112,6 +116,7 @@ public class Home_PremiumSms extends ListActivity {
 
                             intent.putExtra("val1", val2);
                             intent.putExtra("val2", position);
+                            intent.putExtra("sim", simSelected);
                             startActivity(intent);
                         }
 

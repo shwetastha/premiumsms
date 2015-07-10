@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mediatek.telephony.SmsManagerEx;
+
 
 public class NcellMessage extends Activity {
     private int ps;
@@ -22,6 +24,7 @@ public class NcellMessage extends Activity {
     private int cs;
     private final String phnum = String.valueOf("8000");
     private String msg;
+    private int simSelected;
 
     TextView serviceType;
 
@@ -35,7 +38,7 @@ public class NcellMessage extends Activity {
         setContentView(R.layout.activity_ncell_message);
         TextView serviceType = (TextView) findViewById(R.id.textView3n);
         ps = getIntent().getIntExtra("val1", 0);
-
+        simSelected = getIntent().getIntExtra("sim", 100);
         if(ps==horoscope_english){
             cs = getIntent().getIntExtra("val2", 0);
             String english = englishhoro(cs);
@@ -121,8 +124,20 @@ public class NcellMessage extends Activity {
                     }
                 }
             }, new IntentFilter(SENT));
+
             SmsManager sms = SmsManager.getDefault();
-            sms.sendTextMessage(phnum, null, msg, sentPI, null);
+            SmsManagerEx smsEx = SmsManagerEx.getDefault();
+
+            if (simSelected==0)
+                smsEx.sendTextMessage(phnum, null, msg, sentPI, null, 0);
+            else if (simSelected==1)
+                smsEx.sendTextMessage(phnum, null, msg, sentPI, null, 1);
+            else
+                sms.sendTextMessage(phnum, null, msg, sentPI, null);
+
+            Log.e("PremiumSMS","NcellMessage: simSlot="+simSelected);
+
+//            sms.sendTextMessage(phnum, null, msg, sentPI, null);
 //            Toast.makeText(getApplicationContext(), "Message Send Successful.",
 //                    Toast.LENGTH_LONG).show();
 

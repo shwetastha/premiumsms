@@ -26,6 +26,8 @@ public class InternetSMS extends ListActivity {
 		setContentView(R.layout.activity_internet_sms);
 		final int internet_sms = getIntent().getIntExtra("internet_sms",14);
 		final int message = 1;
+		final int simSelected = getIntent().getIntExtra("sim", 100);
+
 		setListAdapter(new MyAdapter<String>(this, android.R.layout.simple_list_item_1,R.id.row, getResources().getStringArray(R.array.internetsms)));
 		ListView lv = getListView();
 		  lv.setOnItemClickListener(new OnItemClickListener() {
@@ -36,10 +38,12 @@ public class InternetSMS extends ListActivity {
 
                   if (position == message) {
                       Intent intent = new Intent(InternetSMS.this, InternetSMSsend.class);
-                      startActivity(intent);
+					  intent.putExtra("sim", simSelected);
+					  startActivity(intent);
                   } else {
                       Intent intent = new Intent(InternetSMS.this, SubscribeUnsubcribe.class );
                       intent.putExtra("service", internet_sms);
+                      intent.putExtra("sim", simSelected);
                       startActivity(intent);
                   }
 

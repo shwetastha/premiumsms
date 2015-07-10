@@ -25,6 +25,8 @@ public class VoiceCall extends ListActivity {
         setContentView(R.layout.activity_voice_call);
         final int voice_call = getIntent().getIntExtra("voice_call", 1);
         final int call = 1;
+        final int simSelected = getIntent().getIntExtra("sim", 100);
+
         setListAdapter(new MyAdapter<String>(this, android.R.layout.simple_list_item_1, R.id.row, getResources().getStringArray(R.array.voicecall)));
         ListView lv = getListView();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -45,6 +47,7 @@ public class VoiceCall extends ListActivity {
                 } else {
                     Intent intent = new Intent(VoiceCall.this, SubscribeUnsubcribe.class);
                     intent.putExtra("service", voice_call);
+                    intent.putExtra("sim", simSelected);
                     startActivity(intent);
                 }
 

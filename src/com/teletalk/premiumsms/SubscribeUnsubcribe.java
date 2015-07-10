@@ -23,6 +23,7 @@ public class SubscribeUnsubcribe extends ListActivity {
     private int val1;
     private int val2;
     private int val3;
+    private int simSelected;
     private final int voice_call = 1;
     private final int internet_sms = 2;
     private final int horoscope_nepali = 14;
@@ -36,6 +37,8 @@ public class SubscribeUnsubcribe extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscribe_unsubcribe);
         final int service = getIntent().getIntExtra("service", 0);
+        simSelected = getIntent().getIntExtra("sim", 100);
+
         setListAdapter(new MyAdapter<String>(this, android.R.layout.simple_list_item_1, R.id.row, getResources().getStringArray(R.array.subscribeunsubscribe)));
         ListView lv = getListView();
         lv.setOnItemClickListener(new OnItemClickListener() {
@@ -48,12 +51,16 @@ public class SubscribeUnsubcribe extends ListActivity {
                         Intent intent = new Intent(SubscribeUnsubcribe.this, Message.class);
                         intent.putExtra("val1", service);
                         intent.putExtra("status", statusSubscribe);
+                        intent.putExtra("sim", simSelected);
+
                         startActivity(intent);
                     } else if (service == internet_sms) {
 
                         Intent intent = new Intent(SubscribeUnsubcribe.this, Message.class);
                         intent.putExtra("val1", service);
                         intent.putExtra("status", statusSubscribe);
+                        intent.putExtra("sim", simSelected);
+
                         startActivity(intent);
                     } else {
                         if ((service == horoscope_nepali) || (service == horoscope_english)) {
@@ -63,6 +70,8 @@ public class SubscribeUnsubcribe extends ListActivity {
                             intent.putExtra("val1", service);
                             intent.putExtra("status", statusSubscribe);
                             intent.putExtra("val3", val3);
+                            intent.putExtra("sim", simSelected);
+
                             startActivity(intent);
                         } else {
                             int value1 = 3;
@@ -71,6 +80,8 @@ public class SubscribeUnsubcribe extends ListActivity {
                             intent.putExtra("val3", value3);
                             intent.putExtra("status", statusSubscribe);
                             intent.putExtra("val1", value1);
+                            intent.putExtra("sim", simSelected);
+
                             startActivity(intent);
                         }
                     }
@@ -81,12 +92,16 @@ public class SubscribeUnsubcribe extends ListActivity {
                         Intent intent = new Intent(SubscribeUnsubcribe.this, Message.class);
                         intent.putExtra("val1", service);
                         intent.putExtra("status", statusUnsubscribe);
+                        intent.putExtra("sim", simSelected);
+
                         startActivity(intent);
                     }else if (service == internet_sms) {
                         val1 = getIntent().getIntExtra("service", 0);
                         Intent intent = new Intent(SubscribeUnsubcribe.this, Message.class);
                         intent.putExtra("val1", service);
                         intent.putExtra("status", statusUnsubscribe);
+                        intent.putExtra("sim", simSelected);
+
                         startActivity(intent);
                     } else {
                         if ((service == horoscope_nepali) || (service == horoscope_english)) {
@@ -96,6 +111,8 @@ public class SubscribeUnsubcribe extends ListActivity {
                             intent.putExtra("val1", service);
                             intent.putExtra("status", statusUnsubscribe);
                             intent.putExtra("val3", val3);
+                            intent.putExtra("sim", simSelected);
+
                             startActivity(intent);
                         } else {
                             int value1 = serviceList;
@@ -104,6 +121,8 @@ public class SubscribeUnsubcribe extends ListActivity {
                             intent.putExtra("val3", value3);
                             intent.putExtra("status", statusUnsubscribe);
                             intent.putExtra("val1", value1);
+                            intent.putExtra("sim", simSelected);
+
                             startActivity(intent);
                         }
                     }
