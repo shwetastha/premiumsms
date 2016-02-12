@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.telephony.SmsManager;
-import android.telephony.TelephonyManager;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -377,14 +376,18 @@ public class Message extends Activity {
 //            sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
 
             SmsManager sms = SmsManager.getDefault();
-            SmsManagerEx smsEx = SmsManagerEx.getDefault();
+            try {
+                SmsManagerEx smsEx = SmsManagerEx.getDefault();
 
-            if (simSelected==0)
-                smsEx.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI, 0);
-            else if (simSelected==1)
-                smsEx.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI, 1);
-            else
+                if (simSelected == 0)
+                    smsEx.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI, 0);
+                else if (simSelected == 1)
+                    smsEx.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI, 1);
+                else
+                    sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
+            }catch (Error e){
                 sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
+            }
 
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Message Send Failed.", Toast.LENGTH_LONG).show();
@@ -444,15 +447,18 @@ public class Message extends Activity {
             }, new IntentFilter(DELIVERED));
             SmsManager sms = SmsManager.getDefault();
 //            sms.sendTextMessage(phnum, null, msg,  sentPI, deliveredPI);
-            SmsManagerEx smsEx = SmsManagerEx.getDefault();
+            try {
+                SmsManagerEx smsEx = SmsManagerEx.getDefault();
 
-            if (simSelected==0)
-                smsEx.sendTextMessage(phnum, null, msg, sentPI, deliveredPI, 0);
-            else if (simSelected==1)
-                smsEx.sendTextMessage(phnum, null, msg, sentPI, deliveredPI, 1);
-            else
+                if (simSelected == 0)
+                    smsEx.sendTextMessage(phnum, null, msg, sentPI, deliveredPI, 0);
+                else if (simSelected == 1)
+                    smsEx.sendTextMessage(phnum, null, msg, sentPI, deliveredPI, 1);
+                else
+                    sms.sendTextMessage(phnum, null, msg, sentPI, deliveredPI);
+            }catch (Error e){
                 sms.sendTextMessage(phnum, null, msg, sentPI, deliveredPI);
-
+            }
 
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Message Send Failed.", Toast.LENGTH_LONG).show();
@@ -512,15 +518,18 @@ public class Message extends Activity {
             }, new IntentFilter(DELIVERED));
             SmsManager sms = SmsManager.getDefault();
 //            sms.sendTextMessage(voice_call_num, null, msg, sentPI, deliveredPI);
-            SmsManagerEx smsEx = SmsManagerEx.getDefault();
+            try {
+                SmsManagerEx smsEx = SmsManagerEx.getDefault();
 
-            if (simSelected==0)
-                smsEx.sendTextMessage(voice_call_num, null, msg, sentPI, deliveredPI, 0);
-            else if (simSelected==1)
-                smsEx.sendTextMessage(voice_call_num, null, msg, sentPI, deliveredPI, 1);
-            else
+                if (simSelected == 0)
+                    smsEx.sendTextMessage(voice_call_num, null, msg, sentPI, deliveredPI, 0);
+                else if (simSelected == 1)
+                    smsEx.sendTextMessage(voice_call_num, null, msg, sentPI, deliveredPI, 1);
+                else
+                    sms.sendTextMessage(voice_call_num, null, msg, sentPI, deliveredPI);
+            }catch (Error e){
                 sms.sendTextMessage(voice_call_num, null, msg, sentPI, deliveredPI);
-
+            }
 
 
         } catch (Exception e) {

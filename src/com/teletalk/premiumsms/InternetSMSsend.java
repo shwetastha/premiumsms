@@ -89,14 +89,19 @@ public class InternetSMSsend extends Activity {
 //                    Toast.makeText(getApplicationContext(), "SMS Sent!",
 //                            Toast.LENGTH_LONG).show();
                     SmsManager smsManager = SmsManager.getDefault();
-                    SmsManagerEx smsEx = SmsManagerEx.getDefault();
 
-                    if (simSelected==0)
-                        smsEx.sendTextMessage(phoneNo, null, sms, sentPI, deliveredPI, 0);
-                    else if (simSelected==1)
-                        smsEx.sendTextMessage(phoneNo, null, sms, sentPI, deliveredPI, 1);
-                    else
+                    try {
+                        SmsManagerEx smsEx = SmsManagerEx.getDefault();
+
+                        if (simSelected == 0)
+                            smsEx.sendTextMessage(phoneNo, null, sms, sentPI, deliveredPI, 0);
+                        else if (simSelected == 1)
+                            smsEx.sendTextMessage(phoneNo, null, sms, sentPI, deliveredPI, 1);
+                        else
+                            smsManager.sendTextMessage(phoneNo, null, sms, sentPI, deliveredPI);
+                    }catch(Error e){
                         smsManager.sendTextMessage(phoneNo, null, sms, sentPI, deliveredPI);
+                    }
 
                     Log.e("PremiumSMS","InternetSMSSend: simSlot="+simSelected);
                     textSMS.setText("");

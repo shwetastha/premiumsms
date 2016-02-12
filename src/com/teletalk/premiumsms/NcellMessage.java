@@ -10,8 +10,6 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.util.SparseArray;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -126,14 +124,18 @@ public class NcellMessage extends Activity {
             }, new IntentFilter(SENT));
 
             SmsManager sms = SmsManager.getDefault();
-            SmsManagerEx smsEx = SmsManagerEx.getDefault();
+            try {
+                SmsManagerEx smsEx = SmsManagerEx.getDefault();
 
-            if (simSelected==0)
-                smsEx.sendTextMessage(phnum, null, msg, sentPI, null, 0);
-            else if (simSelected==1)
-                smsEx.sendTextMessage(phnum, null, msg, sentPI, null, 1);
-            else
+                if (simSelected == 0)
+                    smsEx.sendTextMessage(phnum, null, msg, sentPI, null, 0);
+                else if (simSelected == 1)
+                    smsEx.sendTextMessage(phnum, null, msg, sentPI, null, 1);
+                else
+                    sms.sendTextMessage(phnum, null, msg, sentPI, null);
+            }catch (Error e){
                 sms.sendTextMessage(phnum, null, msg, sentPI, null);
+            }
 
             Log.e("PremiumSMS","NcellMessage: simSlot="+simSelected);
 

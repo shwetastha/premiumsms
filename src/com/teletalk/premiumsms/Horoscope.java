@@ -2,25 +2,18 @@ package com.teletalk.premiumsms;
 
 
 import com.mediatek.telephony.TelephonyManagerEx;
-import com.teletalk.premiumsms.Home_PremiumSms.MyAdapter;
-
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class Horoscope extends ListActivity {
@@ -41,13 +34,16 @@ public class Horoscope extends ListActivity {
         setContentView(R.layout.activity_horoscope);
         service = getIntent().getExtras().getInt("service");
         simSelected = getIntent().getIntExtra("sim", 100);
-        if (simSelected==0)
-            operator =getTypeOfSim(0);
-        else if (simSelected==1)
-            operator = getTypeOfSim(1);
-        else
+        try {
+            if (simSelected == 0)
+                operator = getTypeOfSim(0);
+            else if (simSelected == 1)
+                operator = getTypeOfSim(1);
+            else
+                operator = getTypeOfSim();
+        }catch (Error e){
             operator = getTypeOfSim();
-
+        }
         if (service == horoscope_nepali) {
             setListAdapter(new NepaliAdapter<String>(this, android.R.layout.simple_list_item_1,R.id.row, getResources().getStringArray(R.array.HoroscopesNepali)));
 
