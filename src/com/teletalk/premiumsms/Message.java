@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.SparseArray;
@@ -386,7 +387,12 @@ public class Message extends Activity {
                 else
                     sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
             }catch (Error e){
-                sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
+                if (simSelected == 0)
+                    SimUtil.sendSMS(getApplicationContext(), 0, phnumNtc, null, msg, sentPI, deliveredPI);
+                else if (simSelected == 1)
+                    SimUtil.sendSMS(getApplicationContext(), 1, phnumNtc, null, msg, sentPI, deliveredPI);
+                else
+                    sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
             }
 
         } catch (Exception e) {
@@ -457,7 +463,12 @@ public class Message extends Activity {
                 else
                     sms.sendTextMessage(phnum, null, msg, sentPI, deliveredPI);
             }catch (Error e){
-                sms.sendTextMessage(phnum, null, msg, sentPI, deliveredPI);
+                if (simSelected == 0)
+                    SimUtil.sendSMS(getApplicationContext(), 0, phnumNtc, null, msg, sentPI, deliveredPI);
+                else if (simSelected == 1)
+                    SimUtil.sendSMS(getApplicationContext(), 1, phnumNtc, null, msg, sentPI, deliveredPI);
+                else
+                    sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
             }
 
         } catch (Exception e) {
@@ -528,7 +539,12 @@ public class Message extends Activity {
                 else
                     sms.sendTextMessage(voice_call_num, null, msg, sentPI, deliveredPI);
             }catch (Error e){
-                sms.sendTextMessage(voice_call_num, null, msg, sentPI, deliveredPI);
+                if (simSelected == 0)
+                    SimUtil.sendSMS(getApplicationContext(), 0, phnumNtc, null, msg, sentPI, deliveredPI);
+                else if (simSelected == 1)
+                    SimUtil.sendSMS(getApplicationContext(), 1, phnumNtc, null, msg, sentPI, deliveredPI);
+                else
+                    sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
             }
 
 

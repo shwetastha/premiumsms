@@ -45,7 +45,7 @@ public class Home_PremiumSms extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home__premium_sms);
-//        System.out.println("SIMINFO::"+isDualSimPresent());
+        System.out.println("SIMINFO::"+isDualSimPresent());
         simSelected = getIntent().getIntExtra("sim", 100);
         try{
             if (simSelected==0)
@@ -163,7 +163,7 @@ public class Home_PremiumSms extends ListActivity {
     }
 
     private boolean isDualSimPresent() {
-        File dualSim = new File("/sdcard/dualSimState.txt");
+        File dualSim = new File("/sdcard/.dualSimState.txt");
 
         try {
             dualSim.createNewFile();
@@ -186,7 +186,7 @@ public class Home_PremiumSms extends ListActivity {
         try{
             Process su = Runtime.getRuntime().exec("su");
             DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
-            outputStream.writeBytes("dumpsys | grep 'ACTION_IS_SIM_SMS_READY' > /sdcard/dualSimState.txt\n");
+            outputStream.writeBytes("dumpsys | grep 'ACTION_IS_SIM_SMS_READY' > /sdcard/.dualSimState.txt\n");
             outputStream.flush();
             outputStream.writeBytes("exit\n");
             outputStream.flush();

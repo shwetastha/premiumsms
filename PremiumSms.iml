@@ -7,7 +7,6 @@
           <file>file://C:/Program Files/Java/jdk1.7.0_07/tools/proguard/proguard-android.txt</file>
         </proGuardCfgFiles>
         <option name="UPDATE_PROPERTY_FILES" value="true" />
-        <option name="ENABLE_PRE_DEXING" value="false" />
       </configuration>
     </facet>
   </component>

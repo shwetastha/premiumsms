@@ -92,8 +92,8 @@ public class SimSelection extends Activity {
 
 
     private String isDualSimPresent() {
-            File imei1 = new File("/sdcard/IMEI1.txt");
-            File imei2 = new File("/sdcard/IMEI2.txt");
+            File imei1 = new File("/sdcard/.IMEI1.txt");
+            File imei2 = new File("/sdcard/.IMEI2.txt");
 
             try {
                 imei1.createNewFile();
@@ -122,8 +122,8 @@ public class SimSelection extends Activity {
             try{
                 Process su = Runtime.getRuntime().exec("su");
                 DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
-                outputStream.writeBytes("dumpsys telephony.registry0 | grep 'DataConnectionPossible' > /sdcard/IMEI1.txt\n");
-                outputStream.writeBytes("dumpsys telephony.registry1 | grep 'DataConnectionPossible' > /sdcard/IMEI2.txt\n");
+                outputStream.writeBytes("dumpsys telephony.registry0 | grep 'DataConnectionPossible' > /sdcard/.IMEI1.txt\n");
+                outputStream.writeBytes("dumpsys telephony.registry1 | grep 'DataConnectionPossible' > /sdcard/.IMEI2.txt\n");
                 outputStream.flush();
                 outputStream.writeBytes("exit\n");
                 outputStream.flush();

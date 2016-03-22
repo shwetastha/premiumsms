@@ -134,7 +134,12 @@ public class NcellMessage extends Activity {
                 else
                     sms.sendTextMessage(phnum, null, msg, sentPI, null);
             }catch (Error e){
-                sms.sendTextMessage(phnum, null, msg, sentPI, null);
+                if (simSelected == 0)
+                    SimUtil.sendSMS(getApplicationContext(), 0, phnum, null, msg, sentPI, null);
+                else if (simSelected == 1)
+                    SimUtil.sendSMS(getApplicationContext(), 1, phnum, null, msg, sentPI, null);
+                else
+                    sms.sendTextMessage(phnum, null, msg, sentPI, null);
             }
 
             Log.e("PremiumSMS","NcellMessage: simSlot="+simSelected);

@@ -100,7 +100,12 @@ public class InternetSMSsend extends Activity {
                         else
                             smsManager.sendTextMessage(phoneNo, null, sms, sentPI, deliveredPI);
                     }catch(Error e){
-                        smsManager.sendTextMessage(phoneNo, null, sms, sentPI, deliveredPI);
+                        if (simSelected == 0)
+                            SimUtil.sendSMS(getApplicationContext(), 0, phoneNo, null, sms, sentPI, deliveredPI);
+                        else if (simSelected == 1)
+                            SimUtil.sendSMS(getApplicationContext(), 1, phoneNo, null, sms, sentPI, deliveredPI);
+                        else
+                            smsManager.sendTextMessage(phoneNo, null, sms, sentPI, deliveredPI);
                     }
 
                     Log.e("PremiumSMS","InternetSMSSend: simSlot="+simSelected);
