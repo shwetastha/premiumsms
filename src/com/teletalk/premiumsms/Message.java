@@ -387,12 +387,7 @@ public class Message extends Activity {
                 else
                     sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
             }catch (Error e){
-                if (simSelected == 0)
-                    SimUtil.sendSMS(getApplicationContext(), 0, phnumNtc, null, msg, sentPI, deliveredPI);
-                else if (simSelected == 1)
-                    SimUtil.sendSMS(getApplicationContext(), 1, phnumNtc, null, msg, sentPI, deliveredPI);
-                else
-                    sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
+                 sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
             }
 
         } catch (Exception e) {
@@ -463,12 +458,7 @@ public class Message extends Activity {
                 else
                     sms.sendTextMessage(phnum, null, msg, sentPI, deliveredPI);
             }catch (Error e){
-                if (simSelected == 0)
-                    SimUtil.sendSMS(getApplicationContext(), 0, phnumNtc, null, msg, sentPI, deliveredPI);
-                else if (simSelected == 1)
-                    SimUtil.sendSMS(getApplicationContext(), 1, phnumNtc, null, msg, sentPI, deliveredPI);
-                else
-                    sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
+                sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
             }
 
         } catch (Exception e) {
@@ -539,12 +529,7 @@ public class Message extends Activity {
                 else
                     sms.sendTextMessage(voice_call_num, null, msg, sentPI, deliveredPI);
             }catch (Error e){
-                if (simSelected == 0)
-                    SimUtil.sendSMS(getApplicationContext(), 0, phnumNtc, null, msg, sentPI, deliveredPI);
-                else if (simSelected == 1)
-                    SimUtil.sendSMS(getApplicationContext(), 1, phnumNtc, null, msg, sentPI, deliveredPI);
-                else
-                    sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
+                sms.sendTextMessage(phnumNtc, null, msg, sentPI, deliveredPI);
             }
 
 

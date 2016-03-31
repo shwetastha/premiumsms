@@ -60,7 +60,7 @@ public class SimSelection extends Activity {
         Log.e("PremiumSMS", "sim1_state=" + sim1_state + ",sim2_state=" + sim2_state);
         Log.e("PremiumSMS", "Simgetter=" + sim1_op + "==" + sim2_op);
 
-        if ((sim1_state == TelephonyManager.SIM_STATE_READY && sim2_state ==TelephonyManager.SIM_STATE_READY)||isDualSimPresent().equalsIgnoreCase("true")) {
+        if ((sim1_state == TelephonyManager.SIM_STATE_READY && sim2_state ==TelephonyManager.SIM_STATE_READY)) {
             Log.e("PremiumSMS", "case1");
             sim1 = (Button) findViewById(R.id.buttonSim1);
             sim2 = (Button) findViewById(R.id.buttonSim2);
@@ -89,94 +89,4 @@ public class SimSelection extends Activity {
             startActivity(intent);
         }
     }
-
-
-    private String isDualSimPresent() {
-            File imei1 = new File("/sdcard/.IMEI1.txt");
-            File imei2 = new File("/sdcard/.IMEI2.txt");
-
-            try {
-                imei1.createNewFile();
-                imei2.createNewFile();
-                FileOutputStream fOut = new FileOutputStream(imei1);
-                FileOutputStream fOut2 = new FileOutputStream(imei2);
-                OutputStreamWriter myOutWriter =
-                        new OutputStreamWriter(fOut);
-                OutputStreamWriter myOutWriter2 =
-                        new OutputStreamWriter(fOut2);
-                myOutWriter.close();
-                myOutWriter2.close();
-                fOut.close();
-                fOut2.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                return "Exception";
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "Exception";
-
-            }
-
-
-            Process p;
-            try{
-                Process su = Runtime.getRuntime().exec("su");
-                DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
-                outputStream.writeBytes("dumpsys telephony.registry0 | grep 'DataConnectionPossible' > /sdcard/.IMEI1.txt\n");
-                outputStream.writeBytes("dumpsys telephony.registry1 | grep 'DataConnectionPossible' > /sdcard/.IMEI2.txt\n");
-                outputStream.flush();
-                outputStream.writeBytes("exit\n");
-                outputStream.flush();
-                su.waitFor();
-            }catch(IOException e){
-                try {
-                    throw new Exception(e);
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                    return "Exception";
-
-                }
-            }catch(InterruptedException e){
-                try {
-                    throw new Exception(e);
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                    return "Exception";
-
-                }
-            }
-
-            try {
-                FileInputStream fIn = new FileInputStream(imei1);
-            FileInputStream fIn2 = new FileInputStream(imei2);
-                BufferedReader myReader = new BufferedReader(
-                        new InputStreamReader(fIn));
-            BufferedReader myReader2 = new BufferedReader(
-                    new InputStreamReader(fIn2));
-                String temp = "";
-                String c = "";
-                while ((c = myReader.readLine()) != null) {
-                    temp += c;
-                }
-                String temp2 = "";
-                String c2 = "";
-                while ((c2 = myReader2.readLine()) != null) {
-                    temp2 += c2;
-                }
-//            String str_imei2 = temp2.substring(temp2.indexOf("Device ID ="),15);
-                //string temp contains all the data of the file.
-//            tv.setText("imei1=" + temp.replace("Device ID = ", "") + "\n==imei2=" + temp2.replace("Device ID = ", ""));
-                myReader.close();
-                myReader2.close();
-                return temp.contains("true")&& temp2.contains("true")?"true":"false";
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                return "Exception";
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "Exception";
-            }
-
-    }
-
 }

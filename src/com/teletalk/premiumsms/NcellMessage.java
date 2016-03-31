@@ -37,24 +37,22 @@ public class NcellMessage extends Activity {
         TextView serviceType = (TextView) findViewById(R.id.textView3n);
         ps = getIntent().getIntExtra("val1", 0);
         simSelected = getIntent().getIntExtra("sim", 100);
-        if(ps==horoscope_english){
+        if (ps == horoscope_english) {
             cs = getIntent().getIntExtra("val2", 0);
             String english = englishhoro(cs);
             serviceType.setText("Service Type: " + english);
             sendmsg();
-        }
-        else if(ps==horoscope_nepali){
-            cs= getIntent().getIntExtra("val2",0);
+        } else if (ps == horoscope_nepali) {
+            cs = getIntent().getIntExtra("val2", 0);
             String nepali = nepalihoro(cs);
             serviceType.setText("Service Type: " + nepali);
             sendmsg();
 
-        }
-        else{
+        } else {
             cs = getIntent().getIntExtra("val2", 0);
-            Log.e("PremiumSMS", "Else = "+cs);
+            Log.e("PremiumSMS", "Else = " + cs);
             String typeOfService = getTypeOfService(cs);
-            Log.e("PremiumSMS", "meg = "+msg);
+            Log.e("PremiumSMS", "meg = " + msg);
             serviceType.setText("Service Type: " + typeOfService);
             sendmsg();
         }
@@ -89,6 +87,7 @@ public class NcellMessage extends Activity {
         msg = message.get(position);
         return service.get(position);
     }
+
     void sendmsg() {
         TextView message = (TextView) findViewById(R.id.textView4n);
         message.setText("Message: " + msg);
@@ -133,16 +132,11 @@ public class NcellMessage extends Activity {
                     smsEx.sendTextMessage(phnum, null, msg, sentPI, null, 1);
                 else
                     sms.sendTextMessage(phnum, null, msg, sentPI, null);
-            }catch (Error e){
-                if (simSelected == 0)
-                    SimUtil.sendSMS(getApplicationContext(), 0, phnum, null, msg, sentPI, null);
-                else if (simSelected == 1)
-                    SimUtil.sendSMS(getApplicationContext(), 1, phnum, null, msg, sentPI, null);
-                else
-                    sms.sendTextMessage(phnum, null, msg, sentPI, null);
+            } catch (Error e) {
+                sms.sendTextMessage(phnum, null, msg, sentPI, null);
             }
 
-            Log.e("PremiumSMS","NcellMessage: simSlot="+simSelected);
+            Log.e("PremiumSMS", "NcellMessage: simSlot=" + simSelected);
 
 //            sms.sendTextMessage(phnum, null, msg, sentPI, null);
 //            Toast.makeText(getApplicationContext(), "Message Send Successful.",

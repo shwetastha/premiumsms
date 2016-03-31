@@ -1,7 +1,6 @@
 package com.teletalk.premiumsms;
 
 
-
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -21,11 +20,11 @@ import com.mediatek.telephony.SmsManagerEx;
 
 public class InternetSMSsend extends Activity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_internet_smssend);
-		Button buttonSend = (Button) findViewById(R.id.buttonSend);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_internet_smssend);
+        Button buttonSend = (Button) findViewById(R.id.buttonSend);
         final EditText textSMS = (EditText) findViewById(R.id.SMS);
         final int simSelected = getIntent().getIntExtra("sim", 100);
 
@@ -37,7 +36,8 @@ public class InternetSMSsend extends Activity {
                 String phoneNo = "39191";
                 String sms = textSMS.getText().toString();
 
-                try {String SENT = "SMS_SENT";
+                try {
+                    String SENT = "SMS_SENT";
                     String DELIVERED = "SMS_DELIVERED";
                     PendingIntent sentPI = PendingIntent.getBroadcast(InternetSMSsend.this, 0, new Intent(SENT), 0);
                     PendingIntent deliveredPI = PendingIntent.getBroadcast(InternetSMSsend.this, 0, new Intent(DELIVERED), 0);
@@ -99,16 +99,11 @@ public class InternetSMSsend extends Activity {
                             smsEx.sendTextMessage(phoneNo, null, sms, sentPI, deliveredPI, 1);
                         else
                             smsManager.sendTextMessage(phoneNo, null, sms, sentPI, deliveredPI);
-                    }catch(Error e){
-                        if (simSelected == 0)
-                            SimUtil.sendSMS(getApplicationContext(), 0, phoneNo, null, sms, sentPI, deliveredPI);
-                        else if (simSelected == 1)
-                            SimUtil.sendSMS(getApplicationContext(), 1, phoneNo, null, sms, sentPI, deliveredPI);
-                        else
-                            smsManager.sendTextMessage(phoneNo, null, sms, sentPI, deliveredPI);
+                    } catch (Error e) {
+                        smsManager.sendTextMessage(phoneNo, null, sms, sentPI, deliveredPI);
                     }
 
-                    Log.e("PremiumSMS","InternetSMSSend: simSlot="+simSelected);
+                    Log.e("PremiumSMS", "InternetSMSSend: simSlot=" + simSelected);
                     textSMS.setText("");
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(),
@@ -120,8 +115,8 @@ public class InternetSMSsend extends Activity {
 
 
         });
-		
-	}
+
+    }
 
 
 }
